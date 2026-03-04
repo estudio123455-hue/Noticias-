@@ -6,35 +6,150 @@
     <title id="page-title">Noticia - Mi Diario Automático</title>
     <meta name="description" id="meta-description" content="Lee la noticia completa en Mi Diario Automático.">
     <link rel="canonical" id="canonical-url" href="">
-    <!-- Open Graph / redes sociales -->
     <meta property="og:type" content="article">
     <meta property="og:title" id="og-title" content="">
     <meta property="og:description" id="og-description" content="">
     <meta property="og:url" id="og-url" content="">
     <meta property="og:locale" content="es_ES">
-    <!-- JSON-LD se rellena desde JS al cargar la noticia -->
     <script type="application/ld+json" id="json-ld">{}</script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- AdSense: sustituye ca-pub-XXXXXXXX por tu ID de editor -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: linear-gradient(180deg, #e2e8f0 0%, #f1f5f9 100%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+            padding: 28px 24px 32px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        header .back {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        header .back:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+            margin: 0 0 6px 0;
+        }
+
+        header .tagline {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 920px;
+            margin: 48px auto;
+            padding: 0 24px;
+        }
+
+        .article-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px 36px 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 24px rgba(30, 58, 95, 0.08);
+            border-left: 4px solid #2563eb;
+        }
+
+        .article-card h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.3;
+            margin: 0 0 24px 0;
+        }
+
+        .article-card .body {
+            color: #334155;
+            line-height: 1.75;
+            font-size: 1.05rem;
+        }
+
+        .article-card .body p {
+            margin: 0 0 1em 0;
+        }
+
+        .article-card .body a {
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .article-card .body a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 10px 20px;
+            background: #2563eb;
+            color: #fff !important;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            text-decoration: none;
+        }
+
+        .ad-block {
+            margin: 32px 0;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 12px;
+            text-align: center;
+            min-height: 100px;
+        }
+
+        .error-msg {
+            color: #dc2626;
+            padding: 1rem;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <header class="bg-white border-b p-4 shadow-sm">
-        <div class="container mx-auto max-w-4xl">
-            <a href="index.html" class="text-blue-600 font-semibold hover:underline">← Portada</a>
-            <h1 class="text-xl font-bold text-blue-600 mt-2">NOTICIAS 24/7</h1>
-        </div>
+<body>
+    <header>
+        <a href="index.html" class="back">← Portada</a>
+        <h1>Noticias 24/7</h1>
+        <p class="tagline">Última hora y tendencias</p>
     </header>
 
-    <main class="container mx-auto p-6 max-w-4xl">
-        <article class="bg-white p-6 rounded-xl shadow">
-            <h1 id="titulo" class="text-4xl font-black">Cargando...</h1>
-            <div id="contenido" class="prose prose-lg mt-8 max-w-none"></div>
+    <main class="container">
+        <article class="article-card">
+            <h1 id="titulo">Cargando...</h1>
+            <div id="contenido" class="body"></div>
+            <a href="index.html" class="btn">← Volver a portada</a>
         </article>
 
-        <!-- Bloque de anuncios (ejemplo: después del artículo) -->
-        <div class="my-8 flex justify-center min-h-[100px] bg-gray-50 rounded-lg items-center text-gray-400 text-sm">
-            <!-- Aquí se muestra tu anuncio de AdSense -->
+        <div class="ad-block">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-XXXXXXXX"
@@ -56,7 +171,7 @@
         async function cargarNoticia() {
             if (!slug) {
                 document.getElementById("titulo").textContent = "No se especificó ninguna noticia.";
-                document.getElementById("contenido").innerHTML = "<p class='text-red-600'>Falta el parámetro <code>slug</code> en la URL.</p>";
+                document.getElementById("contenido").innerHTML = "<p class='error-msg'>Falta el parámetro slug en la URL.</p>";
                 return;
             }
 
@@ -68,14 +183,13 @@
 
             if (error || !data) {
                 document.getElementById("titulo").textContent = "Noticia no encontrada";
-                document.getElementById("contenido").innerHTML = "<p class='text-red-600'>No se encontró la noticia.</p>";
+                document.getElementById("contenido").innerHTML = "<p class='error-msg'>No se encontró la noticia.</p>";
                 return;
             }
 
             document.getElementById("titulo").innerText = data.titulo;
             document.getElementById("contenido").innerHTML = data.contenido || "";
 
-            // SEO fuerte: meta dinámico REAL (Google + redes sociales)
             const desc = (data.resumen || data.titulo || "").slice(0, 160);
             document.title = data.titulo + " - Mi Diario Automático";
             document.getElementById("page-title").textContent = document.title;
@@ -87,7 +201,6 @@
             document.getElementById("og-description").setAttribute("content", desc);
             document.getElementById("og-url").setAttribute("content", canonical);
 
-            // Structured Data (JSON-LD) — Google ama esto para posicionamiento
             const jsonLd = {
                 "@context": "https://schema.org",
                 "@type": "NewsArticle",
