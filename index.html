@@ -34,8 +34,9 @@
                 return;
             }
 
+            const list = Array.isArray(data) ? data : [];
             const container = document.getElementById("noticias");
-            container.innerHTML = data.map(noticia => `
+            container.innerHTML = list.map(noticia => `
                 <article class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
                     <h2 class="text-2xl font-bold">
                         <a href="noticia.html?slug=${encodeURIComponent(noticia.slug || noticia.id)}" class="hover:text-blue-600">
