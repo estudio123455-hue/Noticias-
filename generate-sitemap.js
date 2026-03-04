@@ -9,7 +9,7 @@
  */
 const SUPABASE_URL = "https://excasgwodircmbpgbgni.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4Y2FzZ3dvZGlyY21icGdiZ25pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1NDg4NzMsImV4cCI6MjA4ODEyNDg3M30.EebprT1Ioema0yJMKFgaWz7hqvsfAq2t4ZEJ_zPnk8c";
-const SITE_URL = process.env.SITE_URL || "https://TU-DOMINIO.com";
+const SITE_URL = process.env.SITE_URL || "https://estudio123455-hue.github.io/Noticias-";
 
 const { createClient } = require("@supabase/supabase-js");
 const fs = require("fs");
