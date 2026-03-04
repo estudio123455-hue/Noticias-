@@ -28,7 +28,6 @@
             font-weight: 800;
             color: #1f2937;
             letter-spacing: -1px;
-            margin: 0;
         }
 
         .container {
@@ -53,35 +52,25 @@
 
         .card h2 {
             font-size: 1.3rem;
-            margin: 0 0 10px 0;
+            margin-bottom: 10px;
             color: #111827;
-        }
-
-        .card h2 a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .card h2 a:hover {
-            color: #2563eb;
         }
 
         .card p {
             color: #4b5563;
             line-height: 1.6;
             font-size: 0.95rem;
-            margin: 0 0 12px 0;
         }
 
-        .card .link {
+        .card a {
             display: inline-block;
-            margin-top: 4px;
+            margin-top: 12px;
             font-weight: 600;
             color: #2563eb;
             text-decoration: none;
         }
 
-        .card .link:hover {
+        .card a:hover {
             text-decoration: underline;
         }
 
@@ -123,7 +112,7 @@
                 <article class="card">
                     <h2><a href="noticia.html?slug=${encodeURIComponent(noticia.slug || noticia.id)}">${noticia.titulo}</a></h2>
                     <p>${noticia.resumen || ''}</p>
-                    <a href="noticia.html?slug=${encodeURIComponent(noticia.slug || noticia.id)}" class="link">Leer más</a>
+                    <a href="noticia.html?slug=${encodeURIComponent(noticia.slug || noticia.id)}">Leer más</a>
                 </article>
             `).join("");
         }
