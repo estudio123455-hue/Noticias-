@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Noticia - Mi Diario Automático</title>
+    <meta name="description" id="meta-description" content="Lee la noticia completa en Mi Diario Automático.">
+    <link rel="canonical" id="canonical-url" href="">
+    <!-- Open Graph / redes sociales -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="og-title" content="">
+    <meta property="og:description" id="og-description" content="">
+    <meta property="og:url" id="og-url" content="">
+    <meta property="og:locale" content="es_ES">
+    <!-- JSON-LD se rellena desde JS al cargar la noticia -->
+    <script type="application/ld+json" id="json-ld">{}</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AdSense: sustituye ca-pub-XXXXXXXX por tu ID de editor -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-white border-b p-4 shadow-sm">
+        <div class="container mx-auto max-w-4xl">
+            <a href="index.html" class="text-blue-600 font-semibold hover:underline">← Portada</a>
+            <h1 class="text-xl font-bold text-blue-600 mt-2">NOTICIAS 24/7</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-6 max-w-4xl">
+        <article class="bg-white p-6 rounded-xl shadow">
+            <h1 id="titulo" class="text-4xl font-black">Cargando...</h1>
+            <div id="contenido" class="prose prose-lg mt-8 max-w-none"></div>
+        </article>
+
+        <!-- Bloque de anuncios (ejemplo: después del artículo) -->
+        <div class="my-8 flex justify-center min-h-[100px] bg-gray-50 rounded-lg items-center text-gray-400 text-sm">
+            <!-- Aquí se muestra tu anuncio de AdSense -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXX"
+                 data-ad-slot="XXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = "https://excasgwodircmbpgbgni.supabase.co";
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4Y2FzZ3dvZGlyY21icGdiZ25pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1NDg4NzMsImV4cCI6MjA4ODEyNDg3M30.EebprT1Ioema0yJMKFgaWz7hqvsfAq2t4ZEJ_zPnk8c";
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("slug");
+
+        async function cargarNoticia() {
+            if (!slug) {
+                document.getElementById("titulo").textContent = "No se especificó ninguna noticia.";
+                document.getElementById("contenido").innerHTML = "<p class='text-red-600'>Falta el parámetro <code>slug</code> en la URL.</p>";
+                return;
+            }
+
+            const { data, error } = await supabase
+                .from("noticias")
+                .select("*")
+                .eq("slug", slug)
+                .single();
+
+            if (error || !data) {
+                document.getElementById("titulo").textContent = "Noticia no encontrada";
+                document.getElementById("contenido").innerHTML = "<p class='text-red-600'>No se encontró la noticia.</p>";
+                return;
+            }
+
+            document.getElementById("titulo").innerText = data.titulo;
+            document.getElementById("contenido").innerHTML = data.contenido || "";
+
+            // SEO fuerte: meta dinámico REAL (Google + redes sociales)
+            const desc = (data.resumen || data.titulo || "").slice(0, 160);
+            document.title = data.titulo + " - Mi Diario Automático";
+            document.getElementById("page-title").textContent = document.title;
+            document.querySelector('meta[name="description"]').setAttribute("content", desc);
+            document.getElementById("meta-description").setAttribute("content", desc);
+            const canonical = window.location.origin + window.location.pathname + "?slug=" + encodeURIComponent(slug);
+            document.getElementById("canonical-url").setAttribute("href", canonical);
+            document.getElementById("og-title").setAttribute("content", data.titulo);
+            document.getElementById("og-description").setAttribute("content", desc);
+            document.getElementById("og-url").setAttribute("content", canonical);
+
+            // Structured Data (JSON-LD) — Google ama esto para posicionamiento
+            const jsonLd = {
+                "@context": "https://schema.org",
+                "@type": "NewsArticle",
+                "headline": data.titulo,
+                "description": desc,
+                "url": canonical
+            };
+            if (data.created_at) jsonLd.datePublished = data.created_at;
+            if (data.updated_at) jsonLd.dateModified = data.updated_at;
+            document.getElementById("json-ld").textContent = JSON.stringify(jsonLd);
+
+            try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+        }
+
+        cargarNoticia();
+    </script>
+</body>
+</html>

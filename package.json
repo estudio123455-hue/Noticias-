@@ -1,0 +1,10 @@
+{
+  "name": "noticias-cms-automatico",
+  "private": true,
+  "scripts": {
+    "sitemap": "node generate-sitemap.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}
