@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Noticias claras y resumidas: tecnología, ciencia y más. Actualización constante.">
     <meta name="google-site-verification" content="QQvm7S3H8cEamcvyM1gcz4vlGK5mAOtuihe602hrlsc">
-    <title>Mi Diario Automático</title>
+    <link rel="canonical" href="https://estudio123455-hue.github.io/Noticias-/">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#1e3a5f">
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Noticias 24/7">
+    <meta property="og:description" content="Noticias claras y resumidas. Última hora y tendencias.">
+    <meta property="og:url" content="https://estudio123455-hue.github.io/Noticias-/">
+    <meta property="og:locale" content="es_ES">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Noticias 24/7 — Última hora y tendencias</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; }
         body {
             background: linear-gradient(180deg, #e2e8f0 0%, #f1f5f9 100%);
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -17,31 +29,101 @@
             min-height: 100vh;
         }
 
-        header {
+        .site-header {
             background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-            padding: 32px 24px;
-            text-align: center;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
 
-        header h1 {
-            font-size: 2.4rem;
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 16px 24px;
+        }
+
+        .brand {
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .brand:hover { color: rgba(255,255,255,0.9); }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .menu a:hover { color: #fff; }
+
+        .hero {
+            text-align: center;
+            padding: 32px 24px 40px;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.75rem, 4vw, 2.4rem);
             font-weight: 800;
             color: #fff;
             letter-spacing: -0.5px;
-            margin: 0 0 6px 0;
+            margin: 0 0 8px 0;
         }
 
-        header .tagline {
+        .hero .tagline {
             color: rgba(255, 255, 255, 0.85);
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-size: 1rem;
+            margin: 0 0 20px 0;
         }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2563eb;
+            color: #fff !important;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover { background: #1d4ed8; text-decoration: none; }
+
+        .btn-hero {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.8);
+        }
+
+        .btn-hero:hover { background: rgba(255,255,255,0.25); }
 
         .container {
             max-width: 920px;
-            margin: 48px auto;
+            margin: 0 auto;
             padding: 0 24px;
+        }
+
+        main {
+            padding: 40px 0 48px;
+        }
+
+        .grid-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0 0 24px 0;
         }
 
         .card {
@@ -60,6 +142,17 @@
             border-left-color: #1d4ed8;
         }
 
+        .card .badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
         .card h2 {
             font-size: 1.35rem;
             margin: 0 0 12px 0;
@@ -72,48 +165,79 @@
             text-decoration: none;
         }
 
-        .card h2 a:hover {
-            color: #2563eb;
-        }
+        .card h2 a:hover { color: #2563eb; }
 
-        .card p {
+        .card .resumen {
             color: #475569;
             line-height: 1.65;
             font-size: 0.95rem;
-            margin: 0 0 16px 0;
+            margin: 0 0 12px 0;
         }
 
-        .card .btn {
-            display: inline-block;
-            margin-top: 4px;
-            padding: 10px 20px;
-            background: #2563eb;
-            color: #fff !important;
-            font-weight: 600;
+        .card time {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .card .btn { margin-top: 4px; }
+
+        .site-footer {
+            border-top: 1px solid #e2e8f0;
+            background: #fff;
+            padding: 24px;
+            text-align: center;
+            color: #64748b;
             font-size: 0.9rem;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background 0.2s;
         }
 
-        .card .btn:hover {
-            background: #1d4ed8;
+        .site-footer a {
+            color: #2563eb;
             text-decoration: none;
         }
 
-        .error-msg {
-            color: #dc2626;
-            padding: 1rem;
+        .site-footer a:hover { text-decoration: underline; }
+
+        .error-msg { color: #dc2626; padding: 1rem; }
+
+        .empty-msg {
+            text-align: center;
+            color: #64748b;
+            padding: 48px 24px;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Noticias 24/7</h1>
-        <p class="tagline">Última hora y tendencias</p>
+    <header class="site-header">
+        <nav class="nav container">
+            <a class="brand" href="index.html">Noticias 24/7</a>
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="categorias.html">Categorías</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <section class="hero container">
+            <h1>Noticias claras y al grano</h1>
+            <p class="tagline">Resúmenes breves, actualización constante. Última hora y tendencias.</p>
+            <a class="btn btn-hero" href="#ultimas">Ver últimas</a>
+        </section>
     </header>
 
-    <div class="container" id="news-container"></div>
+    <main id="ultimas" class="container">
+        <h2 class="grid-title">Últimas noticias</h2>
+        <div id="news-container"></div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Noticias 24/7 · <a href="sitemap.xml">Sitemap</a> · <a href="contacto.html">Contacto</a></p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
@@ -121,28 +245,47 @@
         const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4Y2FzZ3dvZGlyY21icGdiZ25pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1NDg4NzMsImV4cCI6MjA4ODEyNDg3M30.EebprT1Ioema0yJMKFgaWz7hqvsfAq2t4ZEJ_zPnk8c";
         const db = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+        function formatDate(str) {
+            if (!str) return '';
+            const d = new Date(str);
+            if (isNaN(d.getTime())) return '';
+            const day = d.getDate();
+            const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+            const month = months[d.getMonth()];
+            const year = d.getFullYear();
+            return day + ' ' + month + ' ' + year;
+        }
+
         async function cargarNoticias() {
             const container = document.getElementById("news-container");
-
-            const { data, error } = await db
-                .from("noticias")
-                .select("*")
-                .order("id", { ascending: false });
+            const { data, error } = await db.from("noticias").select("*").order("id", { ascending: false });
 
             if (error) {
-                console.error(error);
                 container.innerHTML = "<p class='error-msg'>Error al cargar noticias.</p>";
                 return;
             }
 
             const list = Array.isArray(data) ? data : [];
-            container.innerHTML = list.map(noticia => `
+            if (list.length === 0) {
+                container.innerHTML = "<p class='empty-msg'>Aún no hay noticias. Pronto aparecerán las últimas.</p>";
+                return;
+            }
+
+            container.innerHTML = list.map(noticia => {
+                const slug = encodeURIComponent(noticia.slug || noticia.id);
+                const url = "noticia.html?slug=" + slug;
+                const resumen = (noticia.resumen || '').slice(0, 180) + ((noticia.resumen || '').length > 180 ? '…' : '');
+                const fecha = formatDate(noticia.created_at);
+                const categoria = noticia.categoria || 'Noticia';
+                return `
                 <article class="card">
-                    <h2><a href="noticia.html?slug=${encodeURIComponent(noticia.slug || noticia.id)}">${noticia.titulo}</a></h2>
-                    <p>${noticia.resumen || ''}</p>
-                    <a href="noticia.html?slug=${encodeURIComponent(noticia.slug || noticia.id)}" class="btn">Leer más</a>
-                </article>
-            `).join("");
+                    <span class="badge">${categoria}</span>
+                    <h2><a href="${url}">${noticia.titulo}</a></h2>
+                    <p class="resumen">${resumen}</p>
+                    ${fecha ? '<time datetime="' + (noticia.created_at || '') + '">' + fecha + '</time>' : ''}
+                    <a href="${url}" class="btn">Leer más</a>
+                </article>`;
+            }).join("");
         }
 
         cargarNoticias();
